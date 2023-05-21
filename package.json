@@ -12,18 +12,16 @@
     "@babel/core": "7.21.8",
     "@babel/preset-env": "7.21.5",
     "babel-loader": "9.1.2",
+    "copy-webpack-plugin": "11.0.0",
     "eslint": "8.38.0",
     "eslint-config-htmlacademy": "9.0.0",
+    "html-webpack-plugin": "5.5.1",
     "webpack": "5.83.1",
     "webpack-cli": "5.1.1",
     "webpack-dev-server": "4.15.0"
   },
   "engines": {
     "node": "18"
-  },
-  "dependencies": {
-    "copy-webpack-plugin": "^11.0.0",
-    "html-webpack-plugin": "^5.5.1"
   },
   "browserslist": [
     "last 2 versions",
