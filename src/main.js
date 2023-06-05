@@ -1,16 +1,28 @@
-import { render, RenderPosition } from './render';
-import InfoView from './view/info-view';
-import FilterView from './view/filter-view';
-import SortView from './view/sort-view';
-import BoardPresenter from './presenter/board-presenter';
+import {render, RenderPosition} from './render.js';
+import InfoView from './view/info-main-view.js';
+import FilterView from './view/trip-filters-view.js';
+import SortView from './view/sort-item-view.js';
+import EventPresenter from './presenter/event-presenter.js';
+import createWaypointList from './module/waypoints-generator.js';
+import WaypointModel from './model/model/waypoint-model.js';
+import OfferModel from './model/model/offer-model.js';
+import DestinationsModel from './model/model/destination-model.js';
 
-const tripMainElement = document.querySelector('.trip-main');
-const tripFiltersElement = document.querySelector('.trip-controls__filters');
-const tripSortElement = document.querySelector('.trip-events');
-const boardPresenter = new BoardPresenter ({boardContainer: tripSortElement});
+const mockService = new createWaypointList();
+const pointsModel = new WaypointModel(mockService);
+const offersModel = new OfferModel(mockService);
+const destinationsModel = new DestinationsModel(mockService);
 
-render(new InfoView(), tripMainElement, RenderPosition.AFTERBEGIN);
-render(new FilterView(), tripFiltersElement);
-render(new SortView(), tripSortElement);
 
-boardPresenter.init();
+const eventPresenter = new EventPresenter({
+  listContainer: document.querySelector('.trip-events'),
+  pointsModel: pointsModel,
+  offersModel: offersModel,
+  destinationsModel: destinationsModel
+});
+
+render(new InfoView(), document.querySelector('.trip-main'), RenderPosition.AFTERBEGIN);
+render (new FilterView(), document.querySelector('.trip-main'));
+render(new SortView(),document.querySelector('.trip-events'));
+
+eventPresenter.init();
