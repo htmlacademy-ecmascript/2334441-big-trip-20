@@ -1,7 +1,7 @@
 import { render } from '../render.js';
 import ListEvent from '../view/event-list-view.js';
-import EventsItemView from '../view/event-offer-view.js';
-import FormItemEvent from '../view/event-item-view.js';
+import EventsItemView from '../view/events-item-view.js';
+import FormItemEvent from '../view/form-item-event.js';
 
 export default class EventPresenter {
 
@@ -9,9 +9,9 @@ export default class EventPresenter {
 
   constructor({listContainer, pointsModel, offersModel, destinationsModel}){
     this.listContainer = listContainer;
-    this.point = pointsModel;
-    this.offer = offersModel;
-    this.destination = destinationsModel;
+    this.pointsModel = pointsModel;
+    this.offersModel = offersModel;
+    this.destinationsModel = destinationsModel;
 
     this.points = pointsModel.get();
   }
@@ -25,8 +25,8 @@ export default class EventPresenter {
       render(
         new EventsItemView({
           point,
-          pointDestination : this.destination.getById(point.destination),
-          pointOffers: this.offer.getByType(point.type)
+          pointDestination : this.destinationsModel.getById(point.destination),
+          pointOffers: this.offersModel.getByType(point.type)
         }),
         this.eventComponent.getElement());
     });

@@ -2,10 +2,10 @@ export default class WaypointModel{
 
   constructor(service){
     this.service = service;
-    this.point = this.service.getPoints();
+    this.points = this.service.getPoints();
   }
 
   get(){
-    return this.point;
+    return this.points;
   }
 }

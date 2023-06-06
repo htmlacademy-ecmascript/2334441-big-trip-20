@@ -50,13 +50,13 @@ export const FAVORITES = [
 ];
 
 export const ZEROPOINT = {
-  id : 0,
-  basePrice : 0,
-  dateFrom :null,
-  dateTo:null,
+  id : 1,
+  basePrice : 111,
+  dateFrom :'28.01.1991',
+  dateTo:'28.01.1992',
   destination:'Alabama',
-  isFavorite:true,
-  offers: null,
+  isFavorite: true,
+  offers: [''],
   type:'sightseeing'
 };
 

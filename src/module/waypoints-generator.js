@@ -5,7 +5,7 @@ import {getRandomArrayElement, getRandomInteger} from '../utils.js';
 import { TYPES_OF_WAYPOINT } from '../const.js';
 
 
-export default class createWaypointList {
+export default class CreateWaypointList {
 
   constructor(){
     this.offers = this.generateOffers();

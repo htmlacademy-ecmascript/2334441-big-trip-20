@@ -1,14 +1,14 @@
 export default class OfferModel{
   constructor(service){
     this.service = service;
-    this.offer = this.service.getOffers();
+    this.offers = this.service.getOffers();
   }
 
   get(){
-    return this.offer;
+    return this.offers;
   }
 
   getByType(type){
-    return this.offer.find((offer)=> offer.type === type);
+    return this.offers.find((offer)=> offer.type === type);
   }
 }
