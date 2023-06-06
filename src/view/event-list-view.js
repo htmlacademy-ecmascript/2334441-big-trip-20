@@ -1,12 +1,12 @@
-import {createElement} from '../render';
+import {createElement} from '../render.js';
 
-const createBoardTemplate = () => (
+const createListEvent = () => (
   '<ul class="trip-events__list"></ul>'
 );
 
-export default class BoardView {
+export default class ListEvent {
   getTemplate() {
-    return createBoardTemplate();
+    return createListEvent();
   }
 
   getElement() {
