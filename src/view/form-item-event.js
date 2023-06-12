@@ -1,5 +1,6 @@
-import { ZEROPOINT } from '../const.js';
-import { createElement } from '../render.js';
+import { ZEROPOINT,CITIES } from '../const.js';
+import AbstractView from '../framework/view/abstract-view.js';
+import { getRandomArrayElement } from '../utils.js';
 
 function createItemEvent(){
   const point = {...ZEROPOINT};
@@ -57,7 +58,7 @@ function createItemEvent(){
       <div class="event__field-group  event__field-group--destination">
         <label class="event__label  event__type-output" for="event-destination-1">${point.type}
         </label>
-        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${point.destination}" list="destination-list-1">
+        <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${getRandomArrayElement(CITIES)}" list="destination-list-1">
         <datalist id="destination-list-1">
           <option value="Amsterdam"></option>
           <option value="Geneva"></option>
@@ -100,21 +101,9 @@ function createItemEvent(){
 </li>`);
 }
 
-export default class FormItemEvent {
+export default class FormItemEvent extends AbstractView {
 
-  getTemplate() {
+  get template() {
     return createItemEvent();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }
