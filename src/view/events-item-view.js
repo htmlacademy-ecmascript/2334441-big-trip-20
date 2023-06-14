@@ -1,7 +1,25 @@
+/* eslint-disable no-console */
 import AbstractView from '../framework/view/abstract-view.js';
 import { formatStringToShortDate, formatStringShorTime, callcDate } from '../utils.js';
 
-
+/*const data = {
+  point:{
+    dateFrom: '',
+    dateTo: '',
+    type: 'thx',
+  },
+  pointDestination: {
+    name:'ddhgjd'
+  },
+  pointOffers:[{
+    title: 'usluga123',
+    price: 123
+  },
+  {
+    title: 'usluga 555',
+    price: 555
+  }]
+};*/
 function createEventsItemViewTemplate(data){
   const {point, pointDestination, pointOffers} = data;
   const offersItemsList = pointOffers?.offers?.map((pointOffer) => `
@@ -11,6 +29,8 @@ function createEventsItemViewTemplate(data){
         <span class="event__offer-price">${pointOffer.price}</span>
       </li>
 `).join('');
+
+
   return(`            <li class="trip-events__item">
   <div class="event">
     <time class="event__date" datetime="${point.dateFrom}">${formatStringToShortDate(point.dateFrom)}</time>
@@ -43,21 +63,32 @@ function createEventsItemViewTemplate(data){
       <span class="visually-hidden">Open event</span>
     </button>
   </div>
-</li>`);
+</li>`
+  );
+
 }
 
 export default class EventsItemView extends AbstractView {
-  #data;
-  constructor(data){
+  data = null;
+  handleEditClick = null;
+  constructor({data, onEditClick}){
     super();
-    this.#data = data;
+    this.data = data;
+    this.handleEditClick = onEditClick;
+    this.element
+      .querySelector('.event__rollup-btn')
+      .addEventListener('click', this.editClickHandler);
   }
 
   get template() {
-    return createEventsItemViewTemplate(this.#data);
+    return createEventsItemViewTemplate(this.data);
+
   }
 
-  setEditHandler(cb){
-    this.element.querySelector('.event__reset-btn').addEventListener('click',cb);
-  }
+  editClickHandler = (evt) => {
+    evt.preventDefault();
+    this.handleEditClick();
+  };
 }
+// eslint-disable-next-line no-console
+
