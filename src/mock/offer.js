@@ -1,10 +1,11 @@
-import { getRandomInteger } from '../utils.js';
-import { PRICE } from '../const.js';
+import { getRandomInteger, getRandomArrayElement } from '../utils.js';
+import { OFFERS, MIN_NUMBER , MAX_NUMBER} from '../const.js';
 
-export function createOffer(type) {
+export function generateMockOffers() {
   return {
-    id:crypto.randomUUID(),
-    title: `Offer ${type}`,
-    price: getRandomInteger(PRICE.MIN, PRICE.MAX)
+    id: crypto.randomUUID(),
+    title: getRandomArrayElement(OFFERS),
+    price: getRandomInteger(MIN_NUMBER, MAX_NUMBER / 10),
   };
 }
+

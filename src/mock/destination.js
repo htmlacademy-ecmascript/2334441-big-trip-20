@@ -1,19 +1,15 @@
-import {DESCRIPTIONS, CITIES} from '../const.js';
-import {getRandomArrayElement} from '../utils.js';
+import { getRandomInteger, getRandomArrayElement } from '../utils.js';
+import { CITIES, MIN_COUNT_DESCRIPTION, MAX_COUNT_DESCRIPTION, DESCRIPTIONS } from '../const.js';
 
-export function createDestination() {
+export function getRandomMockDestination() {
   const city = getRandomArrayElement(CITIES);
-
   return {
     id: crypto.randomUUID(),
-    name:city,
-    description:DESCRIPTIONS,
-    pictures: [
-      {
-        src:`https://loremflickr.com/248/152?random=${crypto.randomUUID()}`,
-        desription: getRandomArrayElement(DESCRIPTIONS)
-      }
-    ]
+    name: city,
+    description: getRandomArrayElement(DESCRIPTIONS),
+    pictures: Array.from({length: getRandomInteger(MIN_COUNT_DESCRIPTION, MAX_COUNT_DESCRIPTION)}, () => ({
+      src: 123,
+      description: `This is description ${city}`,
+    }))
   };
-
 }
