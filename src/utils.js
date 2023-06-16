@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import duration from 'dayjs/plugin/duration';
+import { FilterType } from './const';
 
 dayjs.extend(utc);
 dayjs.extend(duration);
@@ -17,6 +18,33 @@ const HOUR_IN_DAY = 24;
 const MSEC_IN_HOUR = MIN_IN_HOUR * SEC_IN_MIN * MSEC_IN_SEC;
 const MSEC_IN_DAY = HOUR_IN_DAY * MSEC_IN_HOUR;
 
+const getRandomInteger = (a, b) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+};
+
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
+function getDate() {
+  const minutesGap = getRandomInteger(0, 59);
+  const hoursGap = getRandomInteger(0, 23);
+  const daysGap = getRandomInteger(0, 5);
+
+  const dateFrom = dayjs().subtract(getRandomInteger(0, 5), 'day').toDate();
+
+  const dateTo = dayjs(dateFrom)
+    .add(minutesGap, 'minute')
+    .add(hoursGap, 'hour')
+    .add(daysGap, 'day')
+    .toDate();
+
+  return {
+    from: dateFrom,
+    to: dateTo
+  };
+}
 function getRefineEventDateTime(date) {
   return date ? dayjs(date).utc().format(DATE_TIME_FORMAT) : '';
 }
@@ -50,21 +78,38 @@ function getTimeDifference(dateFrom, dateTo) {
   return durationPoint;
 }
 
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
-  const result = Math.random() * (upper - lower + 1) + lower;
-  return Math.floor(result);
+
+function isEventFuture(dataFrom) {
+  return dayjs(dataFrom).isAfter(dayjs());
+}
+
+function isEventPresent(dataFrom) {
+  return dayjs(dataFrom).isSame((dayjs()));
+}
+
+function isEventPast(dataTo) {
+  return dayjs(dataTo).isBefore((dayjs()));
+}
+
+const filter = {
+  [FilterType.EVERYTHING]: (events) => events.filter((event) => event),
+  [FilterType.FUTURE]: (events) => events.filter((event) => isEventFuture(event.dateFrom)),
+  [FilterType.PRESENT]: (events) => events.filter((event) => isEventPresent(event.dateFrom)),
+  [FilterType.PAST]: (events) => events.filter((event) => isEventPast(event.dateTo)),
 };
 
-const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 export {
+  getRandomArrayElement,
+  getRandomInteger,
   getRefineEventDateShort,
   getRefineTimeDate,
   getTimeDifference,
   getRefineFullDate,
   getRefineEventDateTime,
-  getRandomArrayElement,
-  getRandomInteger
+  getDate,
+  isEventFuture,
+  isEventPresent,
+  isEventPast,
+  filter
 };
