@@ -12,7 +12,7 @@ const tripPresenter = new TripPresenter({
   tripContainer: tripEventsElement,
   eventsModel,
 });
-const headerPresenter = new HeaderPresenter({container: siteTripMainElement},filters);
+const headerPresenter = new HeaderPresenter({container: siteTripMainElement,filters});
 
 headerPresenter.init();
 tripPresenter.init();
