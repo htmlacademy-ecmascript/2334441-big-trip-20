@@ -5,15 +5,16 @@ import FilterView from '../view/filter-view';
 export default class HeaderPresenter {
   #container = null;
   #infoContainer = null;
+  #filters = null;
 
-  constructor({container}) {
+  constructor({container, filters}) {
     this.#container = container;
     this.#infoContainer = container.querySelector('.trip-controls__filters');
+    this.#filters = filters;
   }
 
   init() {
     render(new TripInfoView(), this.#container, RenderPosition.AFTERBEGIN);
-    render(new FilterView(), this.#infoContainer);
+    render(new FilterView({filters:this.#filters}), this.#infoContainer);
   }
 }
-

@@ -5,6 +5,7 @@ function createTripListEmptyTemplate() {
 }
 
 export default class TripListEmptyView extends AbstractView {
+
   get template() {
     return createTripListEmptyTemplate();
   }
