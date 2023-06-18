@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import duration from 'dayjs/plugin/duration';
-
+import { FilterType } from '../src/const';
 dayjs.extend(utc);
 dayjs.extend(duration);
 
@@ -59,6 +59,45 @@ const getRandomInteger = (a, b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
+function getWeightForNullDate(dateA, dateB) {
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+
+  if (dateA === null) {
+    return 1;
+  }
+
+  if (dateB === null) {
+    return -1;
+  }
+
+  return null;
+}
+
+function isEventFuture(dataFrom) {
+  return dayjs(dataFrom).isAfter(dayjs());
+}
+
+function isEventPresent(dataFrom) {
+  return dayjs(dataFrom).isSame((dayjs()));
+}
+
+function isEventPast(dataTo) {
+  return dayjs(dataTo).isBefore((dayjs()));
+}
+
+function updateItem(items, update) {
+  return items.map((item) => item.id === update.id ? update : item);
+}
+
+const filter = {
+  [FilterType.EVERYTHING]: (events) => events.filter((event) => event),
+  [FilterType.FUTURE]: (events) => events.filter((event) => isEventFuture(event.dateFrom)),
+  [FilterType.PRESENT]: (events) => events.filter((event) => isEventPresent(event.dateFrom)),
+  [FilterType.PAST]: (events) => events.filter((event) => isEventPast(event.dateTo)),
+};
+
 export {
   getRefineEventDateShort,
   getRefineTimeDate,
@@ -66,5 +105,11 @@ export {
   getRefineFullDate,
   getRefineEventDateTime,
   getRandomArrayElement,
-  getRandomInteger
+  getRandomInteger,
+  getWeightForNullDate,
+  isEventFuture,
+  isEventPresent,
+  isEventPast,
+  updateItem,
+  filter
 };
