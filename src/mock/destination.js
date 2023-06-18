@@ -8,7 +8,7 @@ export function getRandomMockDestination() {
     name: city,
     description: getRandomArrayElement(DESCRIPTIONS),
     pictures: Array.from({length: getRandomInteger(MIN_COUNT_DESCRIPTION, MAX_COUNT_DESCRIPTION)}, () => ({
-      src: 123,
+      src: `https://loremflickr.com/248/152?random=${getRandomInteger(1, 15)}`,
       description: `This is description ${city}`,
     }))
   };

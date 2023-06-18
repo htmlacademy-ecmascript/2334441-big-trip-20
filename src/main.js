@@ -1,16 +1,20 @@
 import TripPresenter from './presenter/trip-presenter';
-import HeaderPresenter from './presenter/header-presenter';
-import EventsModel from './model/waypoint-model.js';
+import FilterPresenter from './presenter/filter-presenter';
+import EventsModel from './model/events-model';
+import {generateFilter} from './mock/filter';
 
 const siteTripMainElement = document.querySelector('.trip-main');
 const tripEventsElement = document.querySelector('.trip-events');
 const eventsModel = new EventsModel();
+const filters = generateFilter(eventsModel.events);
 
 const tripPresenter = new TripPresenter({
   tripContainer: tripEventsElement,
+  headerContainer: siteTripMainElement,
   eventsModel,
 });
-const headerPresenter = new HeaderPresenter({container: siteTripMainElement});
 
-headerPresenter.init();
+const filterPresenter = new FilterPresenter({filters});
+
+filterPresenter.init();
 tripPresenter.init();
