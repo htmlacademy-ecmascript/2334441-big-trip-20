@@ -116,6 +116,26 @@ function getWeightForNullDate(dateA, dateB) {
 function updateItem(items, update) {
   return items.map((item) => item.id === update.id ? update : item);
 }
+
+function sortByDay(eventA, eventB) {
+  if (dayjs(eventA.dateFrom).isAfter(dayjs(eventB.dateFrom))) {
+    return 1;
+  }
+  if (dayjs(eventA.dateFrom) === dayjs(eventB.dateFrom)) {
+    return 0;
+  }
+  if (dayjs(eventA.dateFrom).isBefore(dayjs(eventB.dateFrom))) {
+    return -1;
+  }
+}
+
+function sortByTime(eventA, eventB) {
+  return dayjs(eventB.dateTo).diff(dayjs(eventB.dateFrom)) - dayjs(eventA.dateTo).diff(dayjs(eventA.dateFrom));
+}
+
+function sortByPrice(eventA, eventB) {
+  return eventB.basePrice - eventA.basePrice;
+}
 export {
   getRandomArrayElement,
   getRandomInteger,
@@ -130,6 +150,9 @@ export {
   isEventPast,
   updateItem,
   filter,
-  getDate
+  getDate,
+  sortByDay,
+  sortByTime,
+  sortByPrice
 };
 
