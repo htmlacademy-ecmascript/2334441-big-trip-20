@@ -1,7 +1,7 @@
 import { MIN_NUMBER, MAX_NUMBER} from '../const.js';
 import { getRandomInteger } from '../utils.js';
 
-//надо придумать что-то с датой чтобы не было отрицалова
+//надо придумать что-то с датой
 
 function getRandomDate(startDate, endDate) {
   const startTimestamp = startDate.getTime();
