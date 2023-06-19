@@ -114,11 +114,9 @@ function getWeightForNullDate(dateA, dateB) {
   return null;
 }
 
-function isEventFuture(dataFrom) {
-  return dayjs(dataFrom).isAfter(dayjs());
+function updateItem(items, update) {
+  return items.map((item) => item.id === update.id ? update : item);
 }
-
-
 export {
   getRandomArrayElement,
   getRandomInteger,
@@ -127,8 +125,6 @@ export {
   getTimeDifference,
   getRefineFullDate,
   getRefineEventDateTime,
-  getRandomArrayElement,
-  getRandomInteger,
   getWeightForNullDate,
   isEventFuture,
   isEventPresent,
@@ -136,3 +132,4 @@ export {
   updateItem,
   filter
 };
+
