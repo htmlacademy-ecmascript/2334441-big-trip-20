@@ -1,5 +1,5 @@
 import { MIN_NUMBER, MAX_NUMBER} from '../const.js';
-import { getRandomInteger, getDate } from '../utils.js';
+import { getRandomInteger } from '../utils.js';
 
 //надо придумать что-то с датой чтобы не было отрицалова
 

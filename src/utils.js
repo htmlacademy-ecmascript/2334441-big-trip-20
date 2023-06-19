@@ -77,7 +77,6 @@ function getTimeDifference(dateFrom, dateTo) {
   return durationPoint;
 }
 
-
 function isEventFuture(dataFrom) {
   return dayjs(dataFrom).isAfter(dayjs());
 }
@@ -130,6 +129,7 @@ export {
   isEventPresent,
   isEventPast,
   updateItem,
-  filter
+  filter,
+  getDate
 };
 
