@@ -1,5 +1,5 @@
 import { getRandomInteger, getRandomArrayElement } from '../utils.js';
-import { CITIES, MIN_COUNT_DESCRIPTION, MAX_COUNT_DESCRIPTION, DESCRIPTIONS } from '../const.js';
+import { CITIES, MIN_COUNT_DESCRIPTION, MAX_COUNT_DESCRIPTION, DESCRIPTIONS, MAX_NUMBER, MIN_NUMBER } from '../const.js';
 
 export function getRandomMockDestination() {
   const city = getRandomArrayElement(CITIES);
