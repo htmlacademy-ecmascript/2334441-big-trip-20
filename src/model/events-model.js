@@ -1,6 +1,6 @@
 import { getRandomMockDestination } from '../mock/destination.js';
 import { generateMockOffers } from '../mock/offer.js';
-import { generateWaypoints } from '../mock/waypoints.js';
+import { generateEvents } from '../mock/waypoints.js';
 import {MAX_COUNT_DESCRIPTION, MAX_COUNT_OFFER, MIN_COUNT_OFFER, WAYPOINTS} from '../const.js';
 import {getRandomArrayElement, getRandomInteger} from '../utils.js';
 
@@ -14,7 +14,7 @@ export default class EventsModel {
   constructor() {
     this.#destinations = this.#generateDestinations();
     this.#offers = this.#generateOffers();
-    this.#events = this.#generateWaypoints();
+    this.#events = this.#generateEvents();
   }
 
   get offers() {
@@ -40,7 +40,7 @@ export default class EventsModel {
     }));
   }
 
-  #generateWaypoints() {
+  #generateEvents() {
     return Array.from({length: EVENT_COUNT}, () => {
       const type = getRandomArrayElement(WAYPOINTS);
       const destination = getRandomArrayElement(this.destinations);
@@ -55,7 +55,7 @@ export default class EventsModel {
           .map((offer) => offer.id)
         : [];
 
-      return generateWaypoints(type, destination.id, offerIds);
+      return generateEvents(type, destination.id, offerIds);
     });
   }
 

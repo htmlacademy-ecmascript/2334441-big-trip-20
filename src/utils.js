@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import duration from 'dayjs/plugin/duration';
-import { FilterType } from './const';
-
+import { FilterType } from '../src/const';
 dayjs.extend(utc);
 dayjs.extend(duration);
 
@@ -78,7 +77,6 @@ function getTimeDifference(dateFrom, dateTo) {
   return durationPoint;
 }
 
-
 function isEventFuture(dataFrom) {
   return dayjs(dataFrom).isAfter(dayjs());
 }
@@ -99,6 +97,25 @@ const filter = {
 };
 
 
+function getWeightForNullDate(dateA, dateB) {
+  if (dateA === null && dateB === null) {
+    return 0;
+  }
+
+  if (dateA === null) {
+    return 1;
+  }
+
+  if (dateB === null) {
+    return -1;
+  }
+
+  return null;
+}
+
+function updateItem(items, update) {
+  return items.map((item) => item.id === update.id ? update : item);
+}
 export {
   getRandomArrayElement,
   getRandomInteger,
@@ -107,9 +124,12 @@ export {
   getTimeDifference,
   getRefineFullDate,
   getRefineEventDateTime,
-  getDate,
+  getWeightForNullDate,
   isEventFuture,
   isEventPresent,
   isEventPast,
-  filter
+  updateItem,
+  filter,
+  getDate
 };
+
