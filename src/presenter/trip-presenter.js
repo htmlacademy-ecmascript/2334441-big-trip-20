@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {render, RenderPosition} from '../framework/render';
 import TripListView from '../view/trip-list-view';
 import SortView from '../view/sort-view';
@@ -47,6 +48,8 @@ export default class TripPresenter {
   };
 
   #sortEvents = (sortType) => {
+    console.log('Sort type:', sortType);
+
     switch (sortType) {
       case SortType.DAY:
         this.#tripEvents.sort(sortByDay);
@@ -67,7 +70,8 @@ export default class TripPresenter {
     }
 
     this.#sortEvents(sortType);
-
+    this.#clearEventsList();
+    this.#renderEvents();
   };
 
   #renderSort() {

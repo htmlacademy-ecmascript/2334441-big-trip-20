@@ -130,12 +130,13 @@ function sortByDay(eventA, eventB) {
 }
 
 function sortByTime(eventA, eventB) {
-  return dayjs(eventB.dateTo).diff(dayjs(eventB.dateFrom)) - dayjs(eventA.dateTo).diff(dayjs(eventA.dateFrom));
+  return dayjs(eventA.dateTo).diff(dayjs(eventA.dateFrom)) - dayjs(eventB.dateTo).diff(dayjs(eventB.dateFrom));
 }
 
 function sortByPrice(eventA, eventB) {
   return eventB.basePrice - eventA.basePrice;
 }
+
 export {
   getRandomArrayElement,
   getRandomInteger,

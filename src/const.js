@@ -71,8 +71,8 @@ const FilterType = {
 
 const SortType = {
   DAY: 'day',
-  PRICE: 'price',
   TIME: 'time',
+  PRICE: 'price'
 };
 
 export {WAYPOINTS, CITIES, MAX_NUMBER, MIN_NUMBER, OFFERS,
