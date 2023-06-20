@@ -12,17 +12,17 @@ export default class TripPresenter {
   #tripContainer = null;
   #headerContainer = null;
   #eventsModel = null;
-  #currentSortType = SortType.DAY;
 
   #tripListComponent = new TripListView();
   #sortComponent = null;
   #tripEmptyComponent = new TripListEmptyView();
   #tripInfoComponent = null;
+
   #tripEvents = [];
   #destinations = [];
   #offers = [];
   #eventPresenters = new Map();
-
+  #currentSortType = SortType.DAY;
 
   constructor({tripContainer, headerContainer, eventsModel}) {
     this.#tripContainer = tripContainer;
@@ -47,9 +47,7 @@ export default class TripPresenter {
     this.#eventPresenters.get(updatedEvent.id).init(updatedEvent);
   };
 
-  #sortEvents = (sortType) => {
-    console.log('Sort type:', sortType);
-
+  #sortEvents(sortType) {
     switch (sortType) {
       case SortType.DAY:
         this.#tripEvents.sort(sortByDay);
@@ -62,7 +60,7 @@ export default class TripPresenter {
         break;
     }
     this.#currentSortType = sortType;
-  };
+  }
 
   #handleSortTypeChange = (sortType) => {
     if (this.#currentSortType === sortType) {
@@ -71,7 +69,7 @@ export default class TripPresenter {
 
     this.#sortEvents(sortType);
     this.#clearEventsList();
-    this.#renderEvents();
+    this.#renderTripList();
   };
 
   #renderSort() {
@@ -81,12 +79,12 @@ export default class TripPresenter {
     render(this.#sortComponent, this.#tripListComponent.element, RenderPosition.AFTERBEGIN);
   }
 
-  #renderEvent({eventTrip, destination, offers}) {
+  #renderEvent({eventTrip, destination, destinations, offers}) {
     const eventPresenter = new EventPresenter({
       eventListContainer: this.#tripListComponent.element,
       onDataChange: this.#handleEventChange,
       onModeChange: this.#handleModeChange,
-      destination, offers
+      destination, destinations, offers
     });
 
     eventPresenter.init(eventTrip);
@@ -96,8 +94,9 @@ export default class TripPresenter {
   #renderEvents() {
     this.#tripEvents.forEach((eventTrip) => this.#renderEvent({
       eventTrip,
+      destinations: this.#destinations,
       destination: this.#destinations.find((destination) => destination.id === eventTrip.destination),
-      offers: this.#offers.find((offer) => offer.type === eventTrip.type).offers
+      offers: this.#offers
     }));
   }
 
