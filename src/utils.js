@@ -44,6 +44,7 @@ function getDate() {
     to: dateTo
   };
 }
+
 function getRefineEventDateTime(date) {
   return date ? dayjs(date).utc().format(DATE_TIME_FORMAT) : '';
 }
