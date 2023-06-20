@@ -1,25 +1,28 @@
+/* eslint-disable no-console */
 import {render, RenderPosition} from '../framework/render';
 import TripListView from '../view/trip-list-view';
 import SortView from '../view/sort-view';
 import TripListEmptyView from '../view/trip-list-empty-view';
 import EventPresenter from './event-presenter';
 import TripInfoView from '../view/trip-info-view';
-import {updateItem} from '../utils';
+import {updateItem, sortByDay, sortByPrice, sortByTime} from '../utils';
+import { SortType } from '../const';
 
 export default class TripPresenter {
   #tripContainer = null;
   #headerContainer = null;
   #eventsModel = null;
+  #currentSortType = SortType.DAY;
 
   #tripListComponent = new TripListView();
-  #sortComponent = new SortView();
+  #sortComponent = null;
   #tripEmptyComponent = new TripListEmptyView();
   #tripInfoComponent = null;
-
   #tripEvents = [];
   #destinations = [];
   #offers = [];
   #eventPresenters = new Map();
+
 
   constructor({tripContainer, headerContainer, eventsModel}) {
     this.#tripContainer = tripContainer;
@@ -44,7 +47,37 @@ export default class TripPresenter {
     this.#eventPresenters.get(updatedEvent.id).init(updatedEvent);
   };
 
+  #sortEvents = (sortType) => {
+    console.log('Sort type:', sortType);
+
+    switch (sortType) {
+      case SortType.DAY:
+        this.#tripEvents.sort(sortByDay);
+        break;
+      case SortType.TIME:
+        this.#tripEvents.sort(sortByTime);
+        break;
+      case SortType.PRICE:
+        this.#tripEvents.sort(sortByPrice);
+        break;
+    }
+    this.#currentSortType = sortType;
+  };
+
+  #handleSortTypeChange = (sortType) => {
+    if (this.#currentSortType === sortType) {
+      return;
+    }
+
+    this.#sortEvents(sortType);
+    this.#clearEventsList();
+    this.#renderEvents();
+  };
+
   #renderSort() {
+    this.#sortComponent = new SortView({
+      onSortTypeChange: this.#handleSortTypeChange
+    });
     render(this.#sortComponent, this.#tripListComponent.element, RenderPosition.AFTERBEGIN);
   }
 
