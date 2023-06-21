@@ -53,7 +53,7 @@ const MIN_COUNT_DESCRIPTION = 1;
 const MAX_COUNT_DESCRIPTION = 5;
 
 const EVENT_EMPTY = {
-  type: 'TAXI',
+  type: 'Taxi',
   dateFrom: null,
   dateTo: null,
   basePrice: 0,

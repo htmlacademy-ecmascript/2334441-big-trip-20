@@ -22,7 +22,7 @@ export default class NewEventPresenter {
   }
 
   init() {
-    console.log('DEBUG');
+    console.log('DEBUG1');
     this.#eventEditComponent = new EventEditView({
       destinations: this.#destinations,
       offers: this.#offers,

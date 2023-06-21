@@ -31,8 +31,8 @@ export default class TripPresenter {
       eventListContainer: this.#tripListComponent.element,
       onDataChange: this.#handleViewAction,
       onDestroy: onNewEventDestroy,
-      destinations: eventsModel.destinations,
-      offers: eventsModel.offers
+      destinations: this.destinations,
+      offers: this.offers
     });
 
     this.#eventsModel.addObserver(this.#handleModelEvent);

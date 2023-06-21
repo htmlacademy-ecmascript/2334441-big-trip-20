@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import AbstractStatefulView from '../framework/view/abstract-stateful-view';
 import { CITIES, EVENT_EMPTY, WAYPOINTS } from '../const';
 import { getRefineFullDate } from '../utils';
@@ -23,6 +24,7 @@ function createDestinationCitiesTemplate() {
 }
 
 function createOffersTemplate(event, offers) {
+  console.log('debug3', offers);
   const isChecked = (offer) => event.offers.includes(offer.id) ? 'checked' : '';
   const currentOffers = offers.find((element) => element.type === event.type).offers;
 
