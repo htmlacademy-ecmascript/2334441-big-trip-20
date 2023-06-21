@@ -49,7 +49,7 @@ export default class EventPresenter {
       onFormSubmit: this.#handleFormSubmit,
       onToggleClick: this.#handleToggleClick,
       onDeleteClick: this.#handleDeleteClick,
-      onCanselClick: this.#handleCanselClick,
+      onCancelClick: this.#handleCancelClick,
     });
 
     if (prevEventComponent === null || prevEventEditComponent === null) {
@@ -111,7 +111,7 @@ export default class EventPresenter {
     this.#replaceEditorToEvent();
   };
 
-  #handleCanselClick = () => {
+  #handleCancelClick = () => {
     this.#eventEditComponent.reset(this.#eventTrip);
     this.#replaceEditorToEvent();
   };
