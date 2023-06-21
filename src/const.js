@@ -53,7 +53,7 @@ const MIN_COUNT_DESCRIPTION = 1;
 const MAX_COUNT_DESCRIPTION = 5;
 
 const EVENT_EMPTY = {
-  type: 'taxi',
+  type: 'Taxi',
   dateFrom: null,
   dateTo: null,
   basePrice: 0,
@@ -75,6 +75,19 @@ const SortType = {
   PRICE: 'price'
 };
 
-export {WAYPOINTS, CITIES, MAX_NUMBER, MIN_NUMBER, OFFERS,
+const UserAction = {
+  UPDATE_EVENT: 'UPDATE_EVENT',
+  ADD_EVENT: 'ADD_EVENT',
+  DELETE_EVENT: 'DELETE_EVENT',
+};
+//пусть пока такие будут апдейты
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+};
+
+export { WAYPOINTS, CITIES, MAX_NUMBER, MIN_NUMBER, OFFERS,
   DESCRIPTIONS, FilterType, MAX_COUNT_DESCRIPTION, MIN_COUNT_DESCRIPTION,
-  MIN_COUNT_OFFER, MAX_COUNT_OFFER, EVENT_EMPTY, SortType};
+  MIN_COUNT_OFFER, MAX_COUNT_OFFER, EVENT_EMPTY, SortType,
+  UserAction, UpdateType };

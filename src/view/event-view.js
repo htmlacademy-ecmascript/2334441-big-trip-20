@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 import AbstractView from '../framework/view/abstract-view';
-import { getRefineEventDateShort, getRefineEventDateTime, getRefineTimeDate, getTimeDifference } from '../utils';
+import { getRefineEventDateShort, getRefineEventDateTime,
+  getRefineTimeDate, getTimeDifference } from '../utils';
 
 function createEventOffersTemplate(offers) {
   return offers.map((offer) => `
@@ -10,9 +12,12 @@ function createEventOffersTemplate(offers) {
   </li>`).join('');
 }
 
-function createEventTemplate(eventTrip, destination, offers) {
+function createEventTemplate(eventTrip, destinations, offers) {
   const {basePrice, dateFrom, dateTo, type, isFavorite} = eventTrip;
   const currentOffers = offers.find((element) => element.type === type).offers;
+  const destination = destinations.find((element) => element.id === eventTrip.destination);
+  const isDestination = !destination;
+  const isDestinationName = isDestination ? '' : destination.name;
 
   const date = getRefineEventDateTime(dateFrom);
   const dateShort = getRefineEventDateShort(dateFrom);
@@ -31,7 +36,7 @@ function createEventTemplate(eventTrip, destination, offers) {
          <div class="event__type">
            <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
          </div>
-         <h3 class="event__title">${type} ${destination.name}</h3>
+         <h3 class="event__title">${type} ${isDestinationName}</h3>
          <div class="event__schedule">
            <p class="event__time">
              <time class="event__start-time" datetime="${date}">${dateStart}</time>
@@ -63,15 +68,15 @@ function createEventTemplate(eventTrip, destination, offers) {
 
 export default class EventView extends AbstractView {
   #eventTrip = null;
-  #destination = null;
+  #destinations = null;
   #offers = null;
   #handleEditClick = null;
   #handleFavoriteClick = null;
 
-  constructor({eventTrip, destination, offers, onEditClick, onFavoriteClick}) {
+  constructor({eventTrip, destinations, offers, onEditClick, onFavoriteClick}) {
     super();
     this.#eventTrip = eventTrip;
-    this.#destination = destination;
+    this.#destinations = destinations;
     this.#offers = offers;
     this.#handleEditClick = onEditClick;
     this.#handleFavoriteClick = onFavoriteClick;
@@ -83,7 +88,7 @@ export default class EventView extends AbstractView {
   }
 
   get template() {
-    return createEventTemplate(this.#eventTrip, this.#destination, this.#offers);
+    return createEventTemplate(this.#eventTrip, this.#destinations, this.#offers);
   }
 
   #editClickHandler = (evt) => {

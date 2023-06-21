@@ -1,5 +1,5 @@
 import { getRandomInteger, getRandomArrayElement } from '../utils.js';
-import { OFFERS, MIN_NUMBER , MAX_NUMBER} from '../const.js';
+import { OFFERS, MIN_NUMBER , MAX_NUMBER } from '../const.js';
 
 export function generateMockOffers() {
   return {
