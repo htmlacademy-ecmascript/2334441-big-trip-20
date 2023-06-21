@@ -3,7 +3,6 @@ import FilterPresenter from './presenter/filter-presenter';
 import EventsModel from './model/events-model';
 import FilterModel from './model/filter-model';
 import InfoPresenter from './presenter/info-presenter';
-import {render} from './framework/render';
 import NewEventButtonView from './view/new-event-button-view';
 
 const siteTripMainElement = document.querySelector('.trip-main');
@@ -43,7 +42,6 @@ function handleNewEventButtonClick() {
   newEventButtonComponent.element.disabled = true;
 }
 
-render(newEventButtonComponent, siteTripMainElement);
 
 filterPresenter.init();
 infoPresenter.init();

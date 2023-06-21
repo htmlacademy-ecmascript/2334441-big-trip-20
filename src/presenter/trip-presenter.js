@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { remove, render, RenderPosition } from '../framework/render';
 import TripListView from '../view/trip-list-view';
 import SortView from '../view/sort-view';
@@ -30,8 +31,8 @@ export default class TripPresenter {
       eventListContainer: this.#tripListComponent.element,
       onDataChange: this.#handleViewAction,
       onDestroy: onNewEventDestroy,
-      destinations: this.destinations,
-      offers: this.offers
+      destinations: eventsModel.destinations,
+      offers: eventsModel.offers
     });
 
     this.#eventsModel.addObserver(this.#handleModelEvent);
@@ -70,6 +71,7 @@ export default class TripPresenter {
     this.#currentSortType = SortType.DAY;
     this.#filterModel.setFilter(UpdateType.MAJOR, FilterType.EVERYTHING);
     this.#newEventPresenter.init();
+    console.log('DEBUG');
   }
 
   #handleModeChange = () => {

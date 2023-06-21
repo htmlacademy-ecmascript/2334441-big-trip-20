@@ -53,7 +53,7 @@ const MIN_COUNT_DESCRIPTION = 1;
 const MAX_COUNT_DESCRIPTION = 5;
 
 const EVENT_EMPTY = {
-  type: 'taxi',
+  type: 'TAXI',
   dateFrom: null,
   dateTo: null,
   basePrice: 0,
@@ -76,9 +76,9 @@ const SortType = {
 };
 
 const UserAction = {
-  UPDATE_EVENT: 'UPDATE_TASK',
-  ADD_EVENT: 'ADD_TASK',
-  DELETE_EVENT: 'DELETE_TASK',
+  UPDATE_EVENT: 'UPDATE_EVENT',
+  ADD_EVENT: 'ADD_EVENT',
+  DELETE_EVENT: 'DELETE_EVENT',
 };
 //пусть пока такие будут апдейты
 const UpdateType = {

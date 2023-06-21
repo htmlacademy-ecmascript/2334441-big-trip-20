@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import EventEditView from '../view/event-edit-view';
 import { remove, render, RenderPosition } from '../framework/render';
 import { UpdateType, UserAction } from '../const';
@@ -21,10 +22,7 @@ export default class NewEventPresenter {
   }
 
   init() {
-    if (this.#eventListContainer !== null) {
-      return;
-    }
-
+    console.log('DEBUG');
     this.#eventEditComponent = new EventEditView({
       destinations: this.#destinations,
       offers: this.#offers,
